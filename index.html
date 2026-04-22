@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Gran Aventura</title>
+  <style>
+    :root {
+      --bg-dark: #0b1320;
+      --bg-mid: #14233b;
+      --gold: #e0b15f;
+      --gold-soft: #f3d8a1;
+      --red: #9f2d20;
+      --paper: #d8b07a;
+      --paper-2: #c5965d;
+      --ink: #2e1b0f;
+      --shadow: rgba(0, 0, 0, 0.45);
+      --panel-dark: rgba(16, 10, 7, 0.86);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #fff7ea;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255, 205, 123, 0.15), transparent 18%),
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.06), transparent 10%),
+        radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.05), transparent 10%),
+        linear-gradient(180deg, #08111c 0%, #0d1a2c 35%, #13243b 60%, #071018 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.8), transparent 60%),
+        radial-gradient(1.5px 1.5px at 32% 10%, rgba(255,255,255,.5), transparent 60%),
+        radial-gradient(1.5px 1.5px at 64% 18%, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(1.5px 1.5px at 82% 28%, rgba(255,255,255,.6), transparent 60%),
+        radial-gradient(1.5px 1.5px at 91% 12%, rgba(255,255,255,.6), transparent 60%),
+        radial-gradient(2px 2px at 74% 44%, rgba(255,255,255,.4), transparent 60%),
+        radial-gradient(2px 2px at 15% 52%, rgba(255,255,255,.35), transparent 60%);
+      opacity: .55;
+    }
+
+    .sea-glow,
+    .ship,
+    .ship-2,
+    .rope-left,
+    .rope-right,
+    .compass,
+    .hat {
+      position: fixed;
+      pointer-events: none;
+      opacity: .22;
+      z-index: 0;
+    }
+
+    .sea-glow {
+      bottom: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(95,160,255,.16) 0%, rgba(95,160,255,.08) 35%, transparent 68%);
+      filter: blur(30px);
+    }
+
+    .ship,
+    .ship-2 {
+      width: 180px;
+      height: 100px;
+      background: linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,0));
+      clip-path: polygon(5% 90%, 20% 70%, 34% 70%, 34% 18%, 46% 18%, 46% 62%, 55% 62%, 55% 6%, 70% 6%, 70% 62%, 79% 62%, 95% 90%);
+      filter: blur(.2px);
+    }
+
+    .ship {
+      left: 3%;
+      top: 18%;
+      transform: scale(1.1);
+    }
+
+    .ship-2 {
+      right: 4%;
+      top: 26%;
+      transform: scale(.75) scaleX(-1);
+      opacity: .14;
+    }
+
+    .rope-left,
+    .rope-right {
+      top: 0;
+      width: 120px;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(90, 58, 24, .75) 0,
+        rgba(90, 58, 24, .75) 8px,
+        rgba(125, 82, 37, .75) 8px,
+        rgba(125, 82, 37, .75) 16px
+      );
+      filter: blur(.2px);
+    }
+
+    .rope-left {
+      left: -50px;
+      transform: rotate(6deg);
+      opacity: .12;
+    }
+
+    .rope-right {
+      right: -50px;
+      transform: rotate(-6deg);
+      opacity: .12;
+    }
+
+    .compass,
+    .hat {
+      bottom: 24px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 6px solid rgba(209, 160, 89, .25);
+    }
+
+    .compass {
+      left: 16px;
+      box-shadow: inset 0 0 0 6px rgba(209, 160, 89, .16);
+    }
+
+    .compass::before,
+    .compass::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(209, 160, 89, .25);
+    }
+
+    .compass::before {
+      width: 5px;
+      height: 100px;
+    }
+
+    .compass::after {
+      width: 100px;
+      height: 5px;
+    }
+
+    .hat {
+      right: 22px;
+      width: 170px;
+      height: 70px;
+      border-radius: 50px;
+      border: 10px solid rgba(209, 160, 89, .2);
+      box-shadow: inset 0 -18px 0 rgba(155, 30, 30, .18);
+      transform: rotate(-8deg);
+    }
+
+    .hat::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -38px;
+      transform: translateX(-50%);
+      width: 96px;
+      height: 54px;
+      border-radius: 60px 60px 18px 18px;
+      background: rgba(209, 160, 89, .2);
+      border: 10px solid rgba(209, 160, 89, .18);
+      box-shadow: inset 0 -14px 0 rgba(155, 30, 30, .18);
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px 80px;
+    }
+
+    .poster {
+      width: min(100%, 1020px);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 245, 218, .22), transparent 18%),
+        linear-gradient(180deg, rgba(240, 210, 157, .98) 0%, rgba(215, 176, 121, .98) 100%);
+      color: var(--ink);
+      border: 10px solid #7b532d;
+      border-radius: 26px;
+      padding: 28px 28px 24px;
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.45),
+        inset 0 0 0 3px rgba(255, 238, 205, .25),
+        inset 0 0 80px rgba(70, 35, 10, .12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster::before,
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .poster::before {
+      background:
+        radial-gradient(circle at 12% 11%, rgba(83, 41, 14, .18), transparent 14%),
+        radial-gradient(circle at 90% 8%, rgba(83, 41, 14, .12), transparent 13%),
+        radial-gradient(circle at 84% 88%, rgba(83, 41, 14, .1), transparent 16%),
+        radial-gradient(circle at 13% 89%, rgba(83, 41, 14, .13), transparent 18%);
+      mix-blend-mode: multiply;
+    }
+
+    .poster::after {
+      background-image:
+        linear-gradient(rgba(90,55,25,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90,55,25,.04) 1px, transparent 1px);
+      background-size: 100% 7px, 7px 100%;
+      opacity: .18;
+    }
+
+    .header-top {
+      text-align: center;
+      position: relative;
+      padding-top: 10px;
+    }
+
+    .eyebrow {
+      font-size: .95rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7b4a19;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .skull {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      font-size: 1.6rem;
+      margin: 4px auto 10px;
+      border-radius: 50%;
+      background: rgba(123, 74, 25, .10);
+      border: 2px solid rgba(123, 74, 25, .18);
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 5.9rem);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #2c180c;
+      text-shadow: 0 2px 0 rgba(255,245,216,.25);
+    }
+
+    .title-red {
+      display: block;
+      color: var(--red);
+      transform: rotate(-2deg);
+      text-shadow: 0 2px 0 rgba(60, 10, 5, .15);
+    }
+
+    .banner {
+      width: fit-content;
+      max-width: 100%;
+      margin: 18px auto 14px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 2px solid rgba(98, 58, 20, .18);
+      background: linear-gradient(180deg, rgba(255,244,220,.7), rgba(197,150,93,.28));
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .event-date {
+      text-align: center;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 22px;
+      color: #432412;
+    }
+
+    .intro {
+      max-width: 820px;
+      margin: 0 auto 26px;
+      text-align: center;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      line-height: 1.65;
+      color: #4b2a17;
+      font-weight: 600;
+    }
+
+    .wanted-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin: 6px 0 26px;
+    }
+
+    .wanted {
+      position: relative;
+      padding: 18px 18px 20px;
+      background:
+        linear-gradient(180deg, rgba(247, 228, 186, .95), rgba(224, 189, 132, .95));
+      border: 5px solid #8b5c31;
+      border-radius: 16px;
+      box-shadow:
+        0 10px 24px rgba(44, 24, 12, .18),
+        inset 0 0 30px rgba(90, 45, 15, .08);
+      transform: rotate(-1deg);
+    }
+
+    .wanted:nth-child(2) {
+      transform: rotate(1deg);
+    }
+
+    .wanted::before,
+    .wanted::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px dashed rgba(87, 52, 22, .14);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .wanted-header {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: .95;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      color: #2b180d;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .wanted-subtitle {
+      text-align: center;
+      font-size: .84rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6e4321;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .wanted-photo-wrap {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border: 4px solid #6d4321;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(94, 58, 28, .15), rgba(255,255,255,.28)),
+        repeating-linear-gradient(
+          135deg,
+          rgba(104, 62, 27, .08) 0,
+          rgba(104, 62, 27, .08) 10px,
+          rgba(255,255,255,.08) 10px,
+          rgba(255,255,255,.08) 20px
+        );
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wanted-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .wanted-photo-wrap.has-image .wanted-photo {
+      display: block;
+    }
+
+    .wanted-placeholder {
+      text-align: center;
+      padding: 20px;
+      color: #5a3418;
+      max-width: 260px;
+    }
+
+    .wanted-placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .wanted-placeholder-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .wanted-placeholder-text {
+      font-size: .98rem;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .wanted-name {
+      text-align: center;
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      margin: 14px 0 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #2b180d;
+      letter-spacing: 1px;
+    }
+
+    .wanted-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 8px;
+      color: #3e2410;
+      text-transform: uppercase;
+    }
+
+    .stars {
+      letter-spacing: 5px;
+      color: #7f4d20;
+      font-size: 1.05rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    .mission-block {
+      position: relative;
+      margin: 4px 0 28px;
+      border-radius: 22px;
+      padding: 26px 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 242, 214, .62), rgba(200, 157, 96, .33));
+      border: 3px solid rgba(109, 67, 33, .22);
+      box-shadow: inset 0 0 35px rgba(90, 45, 15, .07);
+    }
+
+    .mission-label {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .mission-text {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.7;
+      color: #472716;
+      font-weight: 700;
+    }
+
+    .mission-text strong {
+      color: #8d2b1f;
+    }
+
+    .countdown-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #3d2311;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .time-box {
+      background: var(--panel-dark);
+      color: var(--gold-soft);
+      border-radius: 16px;
+      padding: 18px 12px 16px;
+      border: 3px solid rgba(224, 177, 95, .18);
+      box-shadow: inset 0 0 0 1px rgba(255, 237, 196, .06);
+      text-align: center;
+    }
+
+    .time-number {
+      display: block;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: clamp(2rem, 4.7vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 2px;
+    }
+
+    .time-label {
+      display: block;
+      margin-top: 10px;
+      font-size: .9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #f6db9c;
+    }
+
+    .countdown-ended {
+      text-align: center;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--panel-dark);
+      border: 3px solid rgba(224, 177, 95, .18);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--gold-soft);
+      margin-bottom: 22px;
+    }
+
+    .footer-message {
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.7;
+      color: #452614;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .footer-message strong {
+      color: #8d2b1f;
+    }
+
+    .credits {
+      margin-top: 20px;
+      text-align: center;
+      font-size: .88rem;
+      color: rgba(76, 41, 15, .72);
+      font-weight: 700;
+    }
+
+    .upload-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: .95rem;
+      color: rgba(76, 41, 15, .8);
+      font-weight: 700;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.22);
+      border: 1px dashed rgba(76, 41, 15, .22);
+    }
+
+    @media (max-width: 860px) {
+      .poster {
+        padding: 22px 16px 20px;
+      }
+
+      .wanted-grid,
+      .countdown {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        padding: 14px 10px 44px;
+      }
+
+      .poster {
+        border-width: 7px;
+        border-radius: 18px;
+      }
+
+      .wanted-grid,
+      .countdown {
+        grid-template-columns: 1fr;
+      }
+
+      .wanted {
+        transform: none !important;
+      }
+
+      .wanted-footer {
+        flex-direction: column;
+      }
+
+      .compass,
+      .hat,
+      .ship,
+      .ship-2,
+      .rope-left,
+      .rope-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sea-glow"></div>
+  <div class="ship"></div>
+  <div class="ship-2"></div>
+  <div class="rope-left"></div>
+  <div class="rope-right"></div>
+  <div class="compass"></div>
+  <div class="hat"></div>
+
+  <div class="wrapper">
+    <main class="poster">
+      <header class="header-top">
+        <div class="eyebrow">Un nuevo viaje. Una nueva leyenda.</div>
+        <div class="skull">☠</div>
+        <h1>
+          La gran aventura
+          <span class="title-red">está a punto de comenzar</span>
+        </h1>
+        <div class="banner">El destino ya ha sido marcado</div>
+        <div class="event-date">23/05/2026 · 08:00h</div>
+        <p class="intro">
+          No se trata de un simple fin de semana. Se trata de una misión reservada para dos futuros leyendas.
+          Muy pronto comenzará una travesía llena de sorpresas, risas, pruebas y momentos que merecen quedar
+          grabados para siempre.
+        </p>
+      </header>
+
+      <section class="wanted-grid">
+        <article class="wanted">
+          <div class="wanted-header">Wanted</div>
+          <div class="wanted-subtitle">Buscado por espíritu aventurero</div>
+          <div class="wanted-photo-wrap" id="wrap1">
+            <img class="wanted-photo" id="photo1" src="" alt="Foto del novio o novia 1" />
+            <div class="wanted-placeholder" id="placeholder1">
+              <div class="wanted-placeholder-icon">📸</div>
+              <div class="wanted-placeholder-title">Pon aquí su foto</div>
+              <div class="wanted-placeholder-text">
+                Sustituye esta imagen por la primera foto en estilo cartel de recompensa.
+              </div>
+            </div>
+          </div>
+          <div class="wanted-name">Nombre 1</div>
+          <div class="wanted-footer">
+            <span>Alive</span>
+            <span class="stars">★ ★ ★ ★ ★</span>
+            <span>Marine</span>
+          </div>
+        </article>
+
+        <article class="wanted">
+          <div class="wanted-header">Wanted</div>
+          <div class="wanted-subtitle">Buscado por alma de capitán</div>
+          <div class="wanted-photo-wrap" id="wrap2">
+            <img class="wanted-photo" id="photo2" src="" alt="Foto del novio o novia 2" />
+            <div class="wanted-placeholder" id="placeholder2">
+              <div class="wanted-placeholder-icon">📸</div>
+              <div class="wanted-placeholder-title">Pon aquí su foto</div>
+              <div class="wanted-placeholder-text">
+                Sustituye esta imagen por la segunda foto en estilo cartel de recompensa.
+              </div>
+            </div>
+          </div>
+          <div class="wanted-name">Nombre 2</div>
+          <div class="wanted-footer">
+            <span>Alive</span>
+            <span class="stars">★ ★ ★ ★ ★</span>
+            <span>Marine</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="mission-block">
+        <div class="mission-label">Próximamente...</div>
+        <p class="mission-text">
+          Se abrirán <strong>retos especiales</strong> que pondrán a prueba vuestro ingenio, vuestra valentía y vuestra capacidad
+          para seguir las pistas correctas. Solo completándolos podréis descubrir <strong>más información sobre esta misión</strong>.
+        </p>
+      </section>
+
+      <section>
+        <div class="countdown-title">Falta</div>
+        <div class="countdown" id="countdown">
+          <div class="time-box">
+            <span class="time-number" id="days">0</span>
+            <span class="time-label">Días</span>
+          </div>
+          <div class="time-box">
+            <span class="time-number" id="hours">0</span>
+            <span class="time-label">Horas</span>
+          </div>
+          <div class="time-box">
+            <span class="time-number" id="minutes">0</span>
+            <span class="time-label">Minutos</span>
+          </div>
+          <div class="time-box">
+            <span class="time-number" id="seconds">0</span>
+            <span class="time-label">Segundos</span>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer-message">
+        Preparaos. Muy pronto comenzará la misión.<br />
+        Y solo quienes estén a la altura descubrirán <strong>de qué va realmente toda esta historia</strong>.
+      </p>
+
+      <div class="upload-note">
+        Para meter las fotos, cambia los archivos de ejemplo por los tuyos en <strong>foto1.jpg</strong> y <strong>foto2.jpg</strong>, o modifica el nombre dentro del código.
+      </div>
+
+      <div class="credits">Página secreta de misión · Solo para los elegidos</div>
+    </main>
+  </div>
+
+  <script>
+    const targetDate = new Date(2026, 4, 23, 8, 0, 0).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById('countdown').outerHTML = `
+          <div class="countdown-ended">¡La aventura ha comenzado!</div>
+        `;
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function setWantedImage(imgId, wrapId, placeholderId, src) {
+      const img = document.getElementById(imgId);
+      const wrap = document.getElementById(wrapId);
+      const placeholder = document.getElementById(placeholderId);
+
+      img.src = src;
+      img.onload = () => {
+        wrap.classList.add('has-image');
+        placeholder.style.display = 'none';
+      };
+
+      img.onerror = () => {
+        wrap.classList.remove('has-image');
+        placeholder.style.display = 'block';
+      };
+    }
+
+    // Cambia estos nombres por los archivos reales que pongas en la misma carpeta.
+    setWantedImage('photo1', 'wrap1', 'placeholder1', 'wanted-poster.png');
+    setWantedImage('photo2', 'wrap2', 'placeholder2', 'wanted-poster2.png');
+  </script>
+</body>
+</html>
