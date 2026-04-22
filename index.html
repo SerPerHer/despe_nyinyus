@@ -6,15 +6,9 @@
   <title>Nyinyus: Rumbo a lo Desconocido</title>
   <style>
     :root {
-      --bg-dark: #0b1320;
-      --bg-mid: #14233b;
-      --gold: #e0b15f;
       --gold-soft: #f3d8a1;
       --red: #9f2d20;
-      --paper: #d8b07a;
-      --paper-2: #c5965d;
       --ink: #2e1b0f;
-      --shadow: rgba(0, 0, 0, 0.45);
       --panel-dark: rgba(16, 10, 7, 0.86);
     }
 
@@ -33,10 +27,8 @@
       font-family: Georgia, "Times New Roman", serif;
       color: #fff7ea;
       background:
-        radial-gradient(circle at 50% 15%, rgba(255, 205, 123, 0.15), transparent 18%),
-        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.06), transparent 10%),
-        radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.05), transparent 10%),
-        linear-gradient(180deg, #08111c 0%, #0d1a2c 35%, #13243b 60%, #071018 100%);
+        linear-gradient(rgba(8, 10, 18, 0.45), rgba(8, 10, 18, 0.55)),
+        url("fondo.jpg") center center / cover no-repeat fixed;
       overflow-x: hidden;
       position: relative;
     }
@@ -47,145 +39,11 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.8), transparent 60%),
-        radial-gradient(1.5px 1.5px at 32% 10%, rgba(255,255,255,.5), transparent 60%),
-        radial-gradient(1.5px 1.5px at 64% 18%, rgba(255,255,255,.65), transparent 60%),
-        radial-gradient(1.5px 1.5px at 82% 28%, rgba(255,255,255,.6), transparent 60%),
-        radial-gradient(1.5px 1.5px at 91% 12%, rgba(255,255,255,.6), transparent 60%),
-        radial-gradient(2px 2px at 74% 44%, rgba(255,255,255,.4), transparent 60%),
-        radial-gradient(2px 2px at 15% 52%, rgba(255,255,255,.35), transparent 60%);
-      opacity: .55;
-    }
-
-    .sea-glow,
-    .ship,
-    .ship-2,
-    .rope-left,
-    .rope-right,
-    .compass,
-    .hat {
-      position: fixed;
-      pointer-events: none;
-      opacity: .22;
-      z-index: 0;
-    }
-
-    .sea-glow {
-      bottom: -180px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1200px;
-      height: 420px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(95,160,255,.16) 0%, rgba(95,160,255,.08) 35%, transparent 68%);
-      filter: blur(30px);
-    }
-
-    .ship,
-    .ship-2 {
-      width: 180px;
-      height: 100px;
-      background: linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,0));
-      clip-path: polygon(5% 90%, 20% 70%, 34% 70%, 34% 18%, 46% 18%, 46% 62%, 55% 62%, 55% 6%, 70% 6%, 70% 62%, 79% 62%, 95% 90%);
-      filter: blur(.2px);
-    }
-
-    .ship {
-      left: 3%;
-      top: 18%;
-      transform: scale(1.1);
-    }
-
-    .ship-2 {
-      right: 4%;
-      top: 26%;
-      transform: scale(.75) scaleX(-1);
-      opacity: .14;
-    }
-
-    .rope-left,
-    .rope-right {
-      top: 0;
-      width: 120px;
-      height: 100vh;
-      background: repeating-linear-gradient(
-        180deg,
-        rgba(90, 58, 24, .75) 0,
-        rgba(90, 58, 24, .75) 8px,
-        rgba(125, 82, 37, .75) 8px,
-        rgba(125, 82, 37, .75) 16px
-      );
-      filter: blur(.2px);
-    }
-
-    .rope-left {
-      left: -50px;
-      transform: rotate(6deg);
-      opacity: .12;
-    }
-
-    .rope-right {
-      right: -50px;
-      transform: rotate(-6deg);
-      opacity: .12;
-    }
-
-    .compass,
-    .hat {
-      bottom: 24px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 6px solid rgba(209, 160, 89, .25);
-    }
-
-    .compass {
-      left: 16px;
-      box-shadow: inset 0 0 0 6px rgba(209, 160, 89, .16);
-    }
-
-    .compass::before,
-    .compass::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(209, 160, 89, .25);
-    }
-
-    .compass::before {
-      width: 5px;
-      height: 100px;
-    }
-
-    .compass::after {
-      width: 100px;
-      height: 5px;
-    }
-
-    .hat {
-      right: 22px;
-      width: 170px;
-      height: 70px;
-      border-radius: 50px;
-      border: 10px solid rgba(209, 160, 89, .2);
-      box-shadow: inset 0 -18px 0 rgba(155, 30, 30, .18);
-      transform: rotate(-8deg);
-    }
-
-    .hat::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -38px;
-      transform: translateX(-50%);
-      width: 96px;
-      height: 54px;
-      border-radius: 60px 60px 18px 18px;
-      background: rgba(209, 160, 89, .2);
-      border: 10px solid rgba(209, 160, 89, .18);
-      box-shadow: inset 0 -14px 0 rgba(155, 30, 30, .18);
+        radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.4), transparent 60%),
+        radial-gradient(1.5px 1.5px at 32% 10%, rgba(255,255,255,.25), transparent 60%),
+        radial-gradient(1.5px 1.5px at 64% 18%, rgba(255,255,255,.3), transparent 60%),
+        radial-gradient(1.5px 1.5px at 82% 28%, rgba(255,255,255,.25), transparent 60%);
+      opacity: .35;
     }
 
     .wrapper {
@@ -201,8 +59,8 @@
     .poster {
       width: min(100%, 1020px);
       background:
-        radial-gradient(circle at 50% 18%, rgba(255, 245, 218, .22), transparent 18%),
-        linear-gradient(180deg, rgba(240, 210, 157, .98) 0%, rgba(215, 176, 121, .98) 100%);
+        radial-gradient(circle at 50% 18%, rgba(255, 245, 218, .16), transparent 18%),
+        linear-gradient(180deg, rgba(240, 210, 157, .96) 0%, rgba(215, 176, 121, .96) 100%);
       color: var(--ink);
       border: 10px solid #7b532d;
       border-radius: 26px;
@@ -244,6 +102,12 @@
       text-align: center;
       position: relative;
       padding-top: 10px;
+    }
+
+    .hero-image {
+      display: block;
+      width: min(100%, 420px);
+      margin: 0 auto 24px;
     }
 
     .eyebrow {
@@ -314,151 +178,10 @@
       margin: 0 auto 26px;
       text-align: center;
       font-size: clamp(1rem, 1.8vw, 1.15rem);
-      line-height: 1.65;
+      line-height: 1.75;
       color: #4b2a17;
       font-weight: 600;
-    }
-
-    .wanted-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-      margin: 6px 0 26px;
-    }
-
-    .wanted {
-      position: relative;
-      padding: 18px 18px 20px;
-      background:
-        linear-gradient(180deg, rgba(247, 228, 186, .95), rgba(224, 189, 132, .95));
-      border: 5px solid #8b5c31;
-      border-radius: 16px;
-      box-shadow:
-        0 10px 24px rgba(44, 24, 12, .18),
-        inset 0 0 30px rgba(90, 45, 15, .08);
-      transform: rotate(-1deg);
-    }
-
-    .wanted:nth-child(2) {
-      transform: rotate(1deg);
-    }
-
-    .wanted::before,
-    .wanted::after {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      border: 1px dashed rgba(87, 52, 22, .14);
-      border-radius: 10px;
-      pointer-events: none;
-    }
-
-    .wanted-header {
-      text-align: center;
-      font-size: clamp(2rem, 5vw, 4rem);
-      line-height: .95;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      color: #2b180d;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .wanted-subtitle {
-      text-align: center;
-      font-size: .84rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #6e4321;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    .wanted-photo-wrap {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border: 4px solid #6d4321;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(94, 58, 28, .15), rgba(255,255,255,.28)),
-        repeating-linear-gradient(
-          135deg,
-          rgba(104, 62, 27, .08) 0,
-          rgba(104, 62, 27, .08) 10px,
-          rgba(255,255,255,.08) 10px,
-          rgba(255,255,255,.08) 20px
-        );
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .wanted-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-
-    .wanted-photo-wrap.has-image .wanted-photo {
-      display: block;
-    }
-
-    .wanted-placeholder {
-      text-align: center;
-      padding: 20px;
-      color: #5a3418;
-      max-width: 260px;
-    }
-
-    .wanted-placeholder-icon {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-
-    .wanted-placeholder-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
-    .wanted-placeholder-text {
-      font-size: .98rem;
-      line-height: 1.45;
-      font-weight: 600;
-    }
-
-    .wanted-name {
-      text-align: center;
-      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-      margin: 14px 0 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-      color: #2b180d;
-      letter-spacing: 1px;
-    }
-
-    .wanted-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-top: 8px;
-      color: #3e2410;
-      text-transform: uppercase;
-    }
-
-    .stars {
-      letter-spacing: 5px;
-      color: #7f4d20;
-      font-size: 1.05rem;
-      flex: 1;
-      text-align: center;
+      white-space: pre-line;
     }
 
     .mission-block {
@@ -553,45 +276,11 @@
       margin-bottom: 22px;
     }
 
-    .footer-message {
-      text-align: center;
-      font-size: clamp(1rem, 2vw, 1.22rem);
-      line-height: 1.7;
-      color: #452614;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .footer-message strong {
-      color: #8d2b1f;
-    }
-
-    .credits {
-      margin-top: 20px;
-      text-align: center;
-      font-size: .88rem;
-      color: rgba(76, 41, 15, .72);
-      font-weight: 700;
-    }
-
-    .upload-note {
-      margin-top: 16px;
-      text-align: center;
-      font-size: .95rem;
-      color: rgba(76, 41, 15, .8);
-      font-weight: 700;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.22);
-      border: 1px dashed rgba(76, 41, 15, .22);
-    }
-
     @media (max-width: 860px) {
       .poster {
         padding: 22px 16px 20px;
       }
 
-      .wanted-grid,
       .countdown {
         grid-template-columns: 1fr 1fr;
       }
@@ -607,86 +296,49 @@
         border-radius: 18px;
       }
 
-      .wanted-grid,
       .countdown {
         grid-template-columns: 1fr;
       }
 
-      .wanted {
-        transform: none !important;
+      .hero-image {
+        width: min(100%, 320px);
+        margin-bottom: 20px;
       }
 
-      .wanted-footer {
-        flex-direction: column;
-      }
-
-      .compass,
-      .hat,
-      .ship,
-      .ship-2,
-      .rope-left,
-      .rope-right {
-        display: none;
+      .eyebrow {
+        font-size: .8rem;
+        letter-spacing: 2px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="sea-glow"></div>
-  <div class="ship"></div>
-  <div class="ship-2"></div>
-  <div class="rope-left"></div>
-  <div class="rope-right"></div>
-  <div class="compass"></div>
-  <div class="hat"></div>
-
   <div class="wrapper">
     <main class="poster">
       <header class="header-top">
+        <img src="wanted-poster.png" alt="Nyinyus" class="hero-image" />
+
         <div class="eyebrow">Un nuevo viaje. Una nueva despedida.</div>
         <div class="skull">☠</div>
+
         <h1>
           La gran aventura
           <span class="title-red">está a punto de comenzar</span>
         </h1>
-        <div class="banner">Reservate este fin de semana</div>
+
+        <div class="banner">Resérvate este fin de semana</div>
         <div class="event-date">23/05/2026 · 08:00h</div>
-        <p class="intro">
-          No es un fin de semana cualquiera.
-          Y desde luego, no es la típica despedida.
-          
-          No habrá retos típicos ni misiones forzadas.
-          Solo nakamas, risas, momentos reales y un plan pensado para disfrutar, desconectar y hacer lo que nos gusta: estar juntos.
-          
-          Porque las mejores aventuras no se fuerzan… se viven.
-          Y esta, además, corre por nuestra cuenta.
-        </p>
+
+        <p class="intro">No es un fin de semana cualquiera.
+Y desde luego, no es la típica despedida.
+
+No habrá retos típicos ni misiones forzadas.
+Solo nakamas, risas, momentos reales y un plan pensado para disfrutar, desconectar y hacer lo que nos gusta: estar juntos.
+
+Porque las mejores aventuras no se fuerzan… se viven.
+Y esta, además, corre por nuestra cuenta.</p>
       </header>
 
-      <section class="wanted-grid" style="grid-template-columns: 1fr; justify-items: center;">
-        <article class="wanted" style="max-width: 420px; width: 100%;">
-          <div class="wanted-header">Wanted</div>
-          <div class="wanted-subtitle">Se busca: Nyinyus</div>
-      
-          <div class="wanted-photo-wrap">
-            <img 
-              class="wanted-photo" 
-              src="wanted-poster.png" 
-              alt="Nyinyus" 
-              style="display: block;"
-            />
-          </div>
-      
-          <div class="wanted-name">Nyinyus</div>
-      
-          <div class="wanted-footer">
-            <span>Alive</span>
-            <span class="stars">★ ★ ★ ★ ★</span>
-            <span>Marine</span>
-          </div>
-        </article>
-      </section>
-      
       <section class="mission-block">
         <div class="mission-label">Próximamente...</div>
         <p class="mission-text">
@@ -716,7 +368,6 @@
           </div>
         </div>
       </section>
-
     </main>
   </div>
 
@@ -747,27 +398,6 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    function setWantedImage(imgId, wrapId, placeholderId, src) {
-      const img = document.getElementById(imgId);
-      const wrap = document.getElementById(wrapId);
-      const placeholder = document.getElementById(placeholderId);
-
-      img.src = src;
-      img.onload = () => {
-        wrap.classList.add('has-image');
-        placeholder.style.display = 'none';
-      };
-
-      img.onerror = () => {
-        wrap.classList.remove('has-image');
-        placeholder.style.display = 'block';
-      };
-    }
-
-    // Cambia estos nombres por los archivos reales que pongas en la misma carpeta.
-    setWantedImage('photo1', 'wrap1', 'placeholder1', 'wanted-poster.png');
-    setWantedImage('photo2', 'wrap2', 'placeholder2', 'wanted-poster2.png');
   </script>
 </body>
 </html>
