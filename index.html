@@ -271,6 +271,28 @@
       color: #f6db9c;
     }
 
+    .skull {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      font-size: 1.6rem;
+      margin: 4px auto 10px;
+      border-radius: 50%;
+      background: rgba(123, 74, 25, .10);
+      border: 2px solid rgba(123, 74, 25, .18);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    
+    .skull:hover {
+      transform: scale(1.08) rotate(-6deg);
+      background: rgba(123, 74, 25, .18);
+    }
+
     .countdown-ended {
       text-align: center;
       padding: 18px;
@@ -325,7 +347,13 @@
     <main class="poster">
       <header class="header-top">
         <div class="eyebrow">Un nuevo viaje. Una nueva despedida.</div>
-        <div class="skull">☠</div>
+        <a href="https://www.google.com/maps/d/edit?mid=1313lkBJdEMD0bhdd4jzmrxyd-8N5Z-k&usp=drive_link" 
+           class="skull" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Ir al Instagram de Nyinyus Despedida">
+          ☠
+        </a>
 
         <h1>
           La gran aventura
